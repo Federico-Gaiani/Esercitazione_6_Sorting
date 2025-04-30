@@ -33,6 +33,12 @@ inline bool operator< (const ClassObj& lhs, const ClassObj& rhs) { return lhs.va
 
 int main(int argc, char *argv[])
 {
+/*
+	vector<int> ww={6,5,6,43,3,2,1,0};
+	SortLibrary::My_HeapSort(ww);
+	
+	cout << ArrayToString(ww) << endl;
+	*/
 	
 	cout << "argc: " << argc << endl;
     for(int a = 0; a < argc; a++)
@@ -40,7 +46,7 @@ int main(int argc, char *argv[])
     cout << endl;
 
 	
-    size_t m = 1000;
+    size_t m = 10;
     if(argc > 1)
     {
         istringstream convert(argv[1]);
@@ -164,6 +170,50 @@ int main(int argc, char *argv[])
     time_elapsed_heap_v3 /= num_experiment;
 
     cout << "Heap Sort - v3: " << time_elapsed_heap_v3 << endl;
+
+/******************************************************************************************/
+double time_elapsed_Myheap_v1 = 0.0;
+    for(unsigned int t = 0; t < num_experiment; t++)
+    {
+        vector<int> v(v1);
+
+        std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+        SortLibrary::My_HeapSort<int>(v);
+        std::chrono::steady_clock::time_point end_time = std::chrono::steady_clock::now();
+        time_elapsed_Myheap_v1 += std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    }
+    time_elapsed_Myheap_v1 /= num_experiment;
+
+    cout << "My Heap Sort - v1: " << time_elapsed_Myheap_v1 << endl;
+
+    double time_elapsed_Myheap_v2 = 0.0;
+    for(unsigned int t = 0; t < num_experiment; t++)
+    {
+        vector<double> v(v2);
+
+        std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+        SortLibrary::My_HeapSort<double>(v);
+        std::chrono::steady_clock::time_point end_time = std::chrono::steady_clock::now();
+        time_elapsed_Myheap_v2 += std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    }
+    time_elapsed_Myheap_v2 /= num_experiment;
+
+    cout << "My Heap Sort - v2: " << time_elapsed_Myheap_v2 << endl;
+
+
+    double time_elapsed_Myheap_v3 = 0.0;
+    for(unsigned int t = 0; t < num_experiment; t++)
+    {
+        vector<int> v(v3);
+
+        std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+        SortLibrary::My_HeapSort<int>(v);
+        std::chrono::steady_clock::time_point end_time = std::chrono::steady_clock::now();
+        time_elapsed_Myheap_v3 += std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    }
+    time_elapsed_Myheap_v3 /= num_experiment;
+
+    cout << "My Heap Sort - v3: " << time_elapsed_Myheap_v3 << endl;
 
 
 	
