@@ -33,7 +33,10 @@ void BubbleSort(std::vector<T>& v)
     }
 }
 
-// TODO --> implementare mio heapsort
+//My_MakeHeap rende il sottoalbero radicato nel nodo i un heap valido, 
+// assumendo che i suoi figli siano già heap. Per questo la chiamata a 
+// My_MakeHeap nel primo for della funzione di sorting parte dai nodi immediatamente
+// sopra le foglie (n/2 -1) per poi ordinare l'albero "salendo".
 template<Sortable T>
 
 void My_MakeHeap(std::vector<T>& v, unsigned int n, unsigned int i){
@@ -67,11 +70,13 @@ template<Sortable T>
 
 void My_HeapSort(std::vector<T>& v){
 	unsigned int n = v.size();
-	
+	//creo l'albero
 	for (int i=n/2 -1; i>=0;i--){
 		My_MakeHeap(v, n, i);
 	}
 	
+	//man mano estraggo i nodi con valore maggiore e ristabilisco la struttura di albero 
+	// sul pezzo di vettore rimasto.
 	for (int i=n-1;i>0;i--){
 		T tmp = v[i];
 		v[i] = v[0];
@@ -83,12 +88,13 @@ void My_HeapSort(std::vector<T>& v){
 }
 
 
+// includendo <algorithm> 
 template<Sortable T>
 void HeapSort(std::vector<T>& v)
 {
     
-	make_heap(v.begin(), v.end());
-    sort_heap(v.begin(), v.end());
+	make_heap(v.begin(), v.end()); // https://en.cppreference.com/w/cpp/algorithm/make_heap
+    sort_heap(v.begin(), v.end()); // https://en.cppreference.com/w/cpp/algorithm/sort_heap
 	
 }
 
